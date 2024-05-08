@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
-#To use the functions follow these instruction:
+#To know more about the functions follow these instructions:
 #1. Go to your terminal and open a interactive Python session by running $python3
 #2. Import the functions from kmer_finder.py using this code:$from kmer_finder import find_substrings, find_substrings_from_file, find_smallest_k
+#3. Using the help(function) will give you more information on each function.
+#$help(find_substrings)
+#$help(find_substrings_from_file)
+#$help(find_smallest_k)
 
 import sys
 
 def find_substrings(sequence, k):
     """
-    Identifies all the substrings of size k and their subsequent substrings for a single sequence.
+    This function identifies all the substrings of size k and their subsequent substrings for a single sequence.
 
     Args:
     sequence (str): The input sequence.
@@ -16,6 +20,7 @@ def find_substrings(sequence, k):
     Returns:
     dict: A dictionary where keys are k-mers and values are lists of subsequent k-mers.
     """
+    # Setting the code to only include specific characters. I added N because some sequences contain N.
     valid_chars = set('ATCGN')
     if not set(sequence).issubset(valid_chars):
         raise ValueError("Invalid character in sequence. Only 'A', 'T', 'C', 'G', and 'N' are allowed.")
@@ -27,11 +32,11 @@ def find_substrings(sequence, k):
         if kmer not in kmers:
             kmers[kmer] = []
         kmers[kmer].append(next_kmer)
-    return kmers
+    return kmers  # returning the identified k-mers
 
 def find_substrings_from_file(filename, k):
     """
-    Identifies all possible substrings and their subsequent substrings for all sequences in a file.
+    This function identifies all possible substrings and their subsequent substrings for all sequences in a file.
 
     Args:
     filename (str): The name of the file containing sequences.
@@ -47,7 +52,7 @@ def find_substrings_from_file(filename, k):
             if sequence:
                 valid_chars = set('ATCGN')
                 if not set(sequence).issubset(valid_chars):
-                    raise ValueError("Invalid character in sequence. Only 'A', 'T', 'C', 'G', and 'N' are allowed.")
+                    raise ValueError("Invalid character in sequence. Only 'A', 'T', 'C', 'G', and 'N' are allowed.") # # Setting the code to only include specific characters. I added N because some sequences contain N
 
                 kmers = {}
                 for i in range(len(sequence) - k + 1):
@@ -57,11 +62,11 @@ def find_substrings_from_file(filename, k):
                         kmers[kmer] = []
                     kmers[kmer].append(next_kmer)
                 all_substrings[sequence] = kmers
-    return all_substrings
+    return all_substrings  # returning the substrings identified
 
 def find_smallest_k(filename):
     """
-    Identifies the smallest value of k where every substring has only one possible subsequent substring.
+    This function identifies the smallest value of k where every substring has only one possible subsequent substring.
     
     Args:
     - filename (str): The name of the file containing sequence fragments.
@@ -89,13 +94,13 @@ def find_all_substrings_with_next(filename, k):
     - dict: A dictionary containing substrings as keys and their subsequent substrings as values.
     """
     all_substrings = {}
-    with open(filename, 'r') as file:
+    with open(filename, 'r') as file: # opening the file with the sequence
         for line in file:
             sequence = line.strip()
             if sequence:
                 valid_chars = set('ATCGN')
                 if not set(sequence).issubset(valid_chars):
-                    raise ValueError("Invalid character in sequence. Only 'A', 'T', 'C', 'G', and 'N' are allowed.")
+                    raise ValueError("Invalid character in sequence. Only 'A', 'T', 'C', 'G', and 'N' are allowed.") # Setting the code to only include specific characters. I added N because some sequences contain N
                 
                 for i in range(len(sequence) - k):
                     substring = sequence[i:i + k]
@@ -108,13 +113,13 @@ def find_all_substrings_with_next(filename, k):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python3 kmer_finder.py <option> <arguments>")
+        print("Usage: python3 kmer_finder.py <option> <arguments>") # I added this, so when the input is not correct, this will show up
         sys.exit(1)
     
     option = sys.argv[1]
     if option == "find_substrings":
         if len(sys.argv) != 4:
-            print("Usage: python3 kmer_finder.py find_substrings <sequence> <k-value>")
+            print("Usage: python3 kmer_finder.py find_substrings <sequence> <k-value>") # I added this, so when the input is not correct, this will show up
             sys.exit(1)
         
         sequence = sys.argv[2]
@@ -129,7 +134,7 @@ if __name__ == "__main__":
     
     elif option == "find_substrings_from_file":
         if len(sys.argv) != 4:
-            print("Usage: python3 kmer_finder.py find_substrings_from_file <filename> <k-value>")
+            print("Usage: python3 kmer_finder.py find_substrings_from_file <filename> <k-value>") # I added this, so when the input is not correct, this will show up
             sys.exit(1)
         
         filename = sys.argv[2]
@@ -146,15 +151,15 @@ if __name__ == "__main__":
     
     elif option == "find_smallest_k":
         if len(sys.argv) != 3:
-            print("Usage: python3 kmer_finder.py find_smallest_k <filename>")
+            print("Usage: python3 kmer_finder.py find_smallest_k <filename>") # I added this, so when the input is not correct, this will show up
             sys.exit(1)
         
-        filename = sys.argv[2]
+        filename = sys.argv[2]   # printing the result
         result = find_smallest_k(filename)
         print("The smallest value of k meeting the criteria:")
         print(result)
     
     else:
-        print("Invalid option. Available options: find_substrings, find_substrings_from_file, find_smallest_k")
+        print("Invalid option. Available options: find_substrings, find_substrings_from_file, find_smallest_k") # If the function name is not correct, this will show up
         sys.exit(1)
 
