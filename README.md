@@ -37,7 +37,7 @@ K-mer: CT, Next K-mers: ['TG', 'TG']
 K-mer: GA, Next K-mers: ['AA']
 K-mer: AA, Next K-mers: ['A']
 ```
-### find_substrings_from_file.py
+### find_substrings_from_file
 
 This function identifies the substrings of a given sequence in a file and the subsequent substring based on the k-value (as argument). To run this scipt, copy this command:
 
@@ -65,9 +65,9 @@ K-mer: AGCGGAACGAGAATAGCTTGCTATTCGGCGTCGAGCGGCG, Next K-mers: ['GCGGAACGAGAATAGC
 ...
 ```
 
-### find_smallest_k.py
+### find_smallest_k
 
-This scipt identifies the smallest k-value for a given sequence file. To run this scipt, copy this command:
+This function identifies the smallest k-value for a given sequence file. To run this scipt, copy this command:
 
 ```python3 kmer_finder.py find_smallest_k <filename>```
 
@@ -81,3 +81,4 @@ Output:
 The smallest value of k meeting the criteria:
 10
 ```
+For the [reads.fa](Genome-assembly/reads.fa), the identified smallest k-value using the find_smallest_k function is 10.
