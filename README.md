@@ -43,7 +43,7 @@ This function identifies the substrings of a given sequence in a file and the su
 
 ```python3 kmer_finder.py find_substrings_from_file <filename> <k-value>```
 
-Change <filename> with the filename you want to use (e.g. sequence.seq) and the <k-value>. For example:
+Change <filename> with the filename you want to use (e.g. [sequence.seq](Genome-assembly/sequence.seq)) and the <k-value>. For example:
 
 ```python3 kmer_finder.py find_substrings_from_file sequence.seq 40```
 
