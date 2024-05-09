@@ -9,7 +9,7 @@
 
 import sys
 
-def find_substrings(sequence, k):
+def find_substrings(sequence, k):   #first function
     """
     This function identifies all the substrings of size k and their subsequent substrings for a single sequence.
 
@@ -25,16 +25,16 @@ def find_substrings(sequence, k):
     if not set(sequence).issubset(valid_chars):
         raise ValueError("Invalid character in sequence. Only 'A', 'T', 'C', 'G', and 'N' are allowed.")
 
-    kmers = {}
-    for i in range(len(sequence) - k + 1):
-        kmer = sequence[i:i+k]
-        next_kmer = sequence[i+1:i+k+1]
-        if kmer not in kmers:
+    kmers = {}   # empty dictionary to store k-mers and their subsequent k-mers
+    for i in range(len(sequence) - k + 1):     
+        kmer = sequence[i:i+k]    # takes the k-mer
+        next_kmer = sequence[i+1:i+k+1]    # takes the next one
+        if kmer not in kmers:   # checking if the k-mer is already in the dictionary
             kmers[kmer] = []
         kmers[kmer].append(next_kmer)
     return kmers  # returning the identified k-mers
 
-def find_substrings_from_file(filename, k):
+def find_substrings_from_file(filename, k):   #second function
     """
     This function identifies all possible substrings and their subsequent substrings for all sequences in a file.
 
@@ -74,13 +74,13 @@ def find_smallest_k(filename):
     Returns:
     - int: The smallest value of k meeting the criteria.
     """
-    smallest_k = 1
-    while True:
-        all_substrings = find_all_substrings_with_next(filename, smallest_k)
+    smallest_k = 1   #starts with 1 as k value
+    while True:   # Initiates an infinite loop to find the smallest k value
+        all_substrings = find_all_substrings_with_next(filename, smallest_k)  # I made another function to identify the next substrings of smallest k
         unique_next_substrings_count = sum(len(set(next_substrings)) == 1 for next_substrings in all_substrings.values())
-        if unique_next_substrings_count == len(all_substrings):
+        if unique_next_substrings_count == len(all_substrings):   # Checks if every substring has only one possible subsequent substring.
             return smallest_k
-        smallest_k += 1
+        smallest_k += 1  # returns to the loop and adds 1
     
 def find_all_substrings_with_next(filename, k):
     """
