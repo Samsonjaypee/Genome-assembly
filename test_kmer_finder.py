@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # This script is used to test the functions in the kmer_finder.py script
-# The script passed all these tests
+# The script passed all these tests 
 
 import sys
 from io import StringIO
